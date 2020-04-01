@@ -1,12 +1,8 @@
 import React from "react";
 import "./Style.css";
+import PropsTypes from 'prop-types'
 
-const Image = "https://randomuser.me/api/portraits/men/16.jpg";
-const User = {
-  name: "Coleman",
-  surname: "Shawn"
-};
-const FullName = User.surname + " " + User.name;
+
 let status = false;
 
 const StatusText = stat => {
@@ -17,14 +13,14 @@ const StatusText = stat => {
   }
 };
 
-const Contact = () => {
+const Contact = (props) => {
   return (
     <div className="Contact">
-      <img className="avatar" src={Image} />
+      <img className="avatar" src={props.avatar} alt={props.name}/>
       <div className="name">
-        <p>{FullName}</p>
+        <p>{props.name}</p>
         <div className="status">
-          <div className={status ? "status-online" : "status-offline"}></div>
+          <div className={props.online ? "status-online" : "status-offline"}></div>
           <div className="status-text">
             <p>{StatusText(status)}</p>
           </div>
@@ -34,4 +30,11 @@ const Contact = () => {
   );
 };
 
+
+
+Contact.PropsTypes ={
+  name: PropsTypes.string.isRequired,
+  avatar: PropsTypes.string.isRequired,
+  online: PropsTypes.bool.isRequired,
+};
 export default Contact;
